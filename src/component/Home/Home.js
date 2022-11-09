@@ -33,7 +33,7 @@ const Home = () => {
 			</h2>
 			<div className="space-x-2 text-center py-2 lg:py-0">
 				<span>for a new user & free shipping! Use code:</span>
-				<span className="font-bold text-lg">MAMBA</span>
+				<span className="font-bold text-lg">Discount-20%</span>
 			</div>
 			<Link to='' className="px-5 hover:text-sky-600 mt-4 lg:mt-0 py-3 rounded-md border block dark:bg-gray-50
              dark:text-gray-900 border-gray-400">Explore Services</Link>
