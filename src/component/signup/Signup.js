@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../authproovider/AuthProvidor';
 import logo from '../../image/73812-cloud-computing-security.gif'
 
 const Signup = () => {
+    const {createUser,setUser} = useContext(AuthContext)
     const handlesubmit =(event)=>{
         event.preventDefault();
         const form = event.target;
@@ -10,7 +12,14 @@ const Signup = () => {
         const password = form.password.value;
         const image = form.image.value;
         const name = form.name.value;
-        console.log(email, password,image,name);
+        createUser(email,password)
+        .then((result) => {             
+            const user = result.user;
+            console.log(user)
+          })
+          .catch(err=>console.error(err))
+          form.reset();
+     
       }
     return (
         <div className='grid md:grid-cols-2'>
@@ -30,7 +39,7 @@ const Signup = () => {
      </div>
      <div className="space-y-1 text-sm">
          <label for="text" className="block text-gray-200">image Url</label>
-         <input type="text" name="image" id="username" 
+         <input type="text" name="image" id="img url" 
          placeholder="Enter Your image url" className="w-full px-4 py-3 rounded-md border-gray-700
           bg-gray-200 text-black focus:border-violet-400" />
      </div>
