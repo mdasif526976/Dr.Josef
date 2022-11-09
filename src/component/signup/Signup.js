@@ -8,7 +8,9 @@ const Signup = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        const image = form.image.value;
+        const name = form.name.value;
+        console.log(email, password,image,name);
       }
     return (
         <div className='grid md:grid-cols-2'>
@@ -28,14 +30,15 @@ const Signup = () => {
      </div>
      <div className="space-y-1 text-sm">
          <label for="text" className="block text-gray-200">image Url</label>
-         <input type="text" name="email" id="username" 
+         <input type="text" name="image" id="username" 
          placeholder="Enter Your image url" className="w-full px-4 py-3 rounded-md border-gray-700
           bg-gray-200 text-black focus:border-violet-400" />
      </div>
      <div className="space-y-1 text-sm">
          <label for="email" className="block text-gray-200">Email</label>
          <input type="email" name="email" id="username" 
-         placeholder="Enter Your Email" className="w-full px-4 py-3 rounded-md border-gray-700
+         placeholder="Enter Your Email" className="w-full px-4 py-3 
+          rounded-md border-gray-700
           bg-gray-200 text-black focus:border-violet-400" />
      </div>
      <div className="space-y-1 text-sm">
