@@ -14,12 +14,12 @@ const Home = () => {
                 </div>
                 <div className='md:col-span-3'>
                     <div className='mb-4 md:my-36 w-full'>
-                    <h1 className='text-3xl text-white font-extralight '>I'm Shall Provide You,<br></br> Best Services 
+                    <h1 className='text-3xl text-white font-normal '>I Shall Provide You,<br></br> Best Services 
                      By Care & <br></br> Modern Technology.
                     </h1>
                     <div className='flex justify-around gap-3 mt-3'>
-                    <Link to='' className='bg-green-300 p-4 rounded-md hover:bg-white hover:text-green-500 '>My Servies</Link>
-                    <Link to='' className='bg-yellow-300 p-4 rounded-md hover:bg-white hover:text-yellow-500 '>About Me</Link>
+                    <Link to='/service' className='bg-green-300 p-4 rounded-md hover:bg-white hover:text-green-500 '>My Servies</Link>
+                    <Link to='' className='bg-yellow-300 p-4 rounded-md hover:bg-white hover:text-yellow-500 '>Contract Me</Link>
                     </div>
                     </div>
                 </div>

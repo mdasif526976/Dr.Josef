@@ -4,6 +4,7 @@ import { AuthContext } from '../authproovider/AuthProvidor';
 
 const Navbar = () => {
     const {review,user} = useContext(AuthContext)
+    console.log(user.photoURL)
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -39,12 +40,23 @@ const Navbar = () => {
     </ul>
     </div>
     <div>
-        <img src='https://placeimg.com/80/80/people' alt=''></img>
+        {user.uid &&
+            <img className='w-24 h-24 p-3 rounded-full' src={user.photoURL} alt=''></img>
+        }
     </div>
     <div className="dropdown dropdown-end md:hidden">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img src="https://placeimg.com/80/80/people" alt='' />
+        {user.uid ?<>
+            <img className='w-24 h-24 p-3 rounded-full' src={user.photoURL} alt=''></img>
+            </>
+            :<div>
+                <svg className="swap-off fill-current" 
+                xmlns="http://www.w3.org/2000/svg" width="32" height="32" 
+                viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"/></svg>
+  
+            </div>
+        }
         </div>
       </label>
       <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
