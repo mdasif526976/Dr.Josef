@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../authproovider/AuthProvidor';
 import logo from '../../image/73812-cloud-computing-security.gif'
 
 const Signup = () => {
-    const {createUser,setUser} = useContext(AuthContext)
+    const {createUser,setUser} = useContext(AuthContext);
+    const navigate = useNavigate();
     const handlesubmit =(event)=>{
         event.preventDefault();
         const form = event.target;
@@ -16,6 +17,8 @@ const Signup = () => {
         .then((result) => {             
             const user = result.user;
             console.log(user)
+            setUser(user)
+            navigate('/')
           })
           .catch(err=>console.error(err))
           form.reset();

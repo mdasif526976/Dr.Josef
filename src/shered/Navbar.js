@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../authproovider/AuthProvidor';
 
 const Navbar = () => {
-    const {review} = useContext(AuthContext)
+    const {review,user} = useContext(AuthContext)
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -15,19 +15,25 @@ const Navbar = () => {
     <ul className='md:flex mr-10 hidden'>
 <Link to='/' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Home</Link>
 <Link to='/service' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Services</Link>
-<Link to='/review' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>
+{
+    user.uid?
+    <Link to='/review' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>
     <div className='relative'>
       <div>
         <p className='absolute left-3/4 bottom-4 bg-sky-500 px-2
          rounded-full text-white'>{review}</p>
       </div>
       <div>
-        <h1>Reviews</h1>
+        <h1>My Reviews</h1>
       </div>
     </div>
     </Link>
-<Link to='/login' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Login</Link>
+    :
+    <>
+    <Link to='/login' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Login</Link>
 <Link to='/signup' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>SignUp</Link>
+    </>
+}
 <Link to='/about' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>About</Link>
 <Link to='/blog' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Blogs</Link>
     </ul>
