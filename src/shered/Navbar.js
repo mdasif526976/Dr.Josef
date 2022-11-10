@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../authproovider/AuthProvidor';
 
 const Navbar = () => {
-    const {review,user} = useContext(AuthContext)
+    const {review,user,logOut} = useContext(AuthContext)
     console.log(user.photoURL)
     return (
         <div>
@@ -15,9 +15,10 @@ const Navbar = () => {
     <div className="form-control">
     <ul className='md:flex mr-10 hidden'>
 <Link to='/' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Home</Link>
-<Link to='/service' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Services</Link>
+<Link to='/services' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Services</Link>
 {
     user.uid?
+   <>
     <Link to='/review' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>
     <div className='relative'>
       <div>
@@ -29,6 +30,8 @@ const Navbar = () => {
       </div>
     </div>
     </Link>
+    <button onClick={logOut} className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Logout</button>
+   </>
     :
     <>
     <Link to='/login' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Login</Link>
@@ -41,14 +44,14 @@ const Navbar = () => {
     </div>
     <div>
         {user.uid &&
-            <img className='w-24 h-24 p-3 rounded-full' src={user.photoURL} alt=''></img>
+            <img className='w-24 h-24 p-3 rounded-full hidden md:visible' src={user.photoURL} alt=''></img>
         }
     </div>
     <div className="dropdown dropdown-end md:hidden">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
         {user.uid ?<>
-            <img className='w-24 h-24 p-3 rounded-full' src={user.photoURL} alt=''></img>
+            <img className='w-36 h-36 p-3 rounded-full' src={user.photoURL} alt=''></img>
             </>
             :<div>
                 <svg className="swap-off fill-current" 

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth'
+import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth'
 import { app } from '../firebase/Firebase.config';
 const auth = getAuth(app);
 export const AuthContext = createContext();
@@ -19,10 +19,23 @@ const AuthProvidor = ({children}) => {
     setloader(true)
    return signInWithEmailAndPassword(auth,email,password)
   }
+  // update profile
+  const updateProfile =( displayName,photoURL)=>{
+    updateProfile(auth.currentUser,{
+      displayName:`displayName`,
+      photoURL:`photoURL`
+    }).then(()=>{
+
+    })
+    .catch((error)=>{
+     console.error(error);
+    })
+    
+  }
   // authenticate by google
   const googleProvider = new GoogleAuthProvider();
   const googleSignIn = ()=>{
-    signInWithPopup(auth,googleProvider)
+   signInWithPopup(auth,googleProvider)
     .then(result=>{
         const user = result.user;
         setUser(user);
@@ -32,7 +45,27 @@ const AuthProvidor = ({children}) => {
     })
   }
 
-    const authInfo ={auth,googleSignIn,signIn,loader,createUser,setloader,user,setUser,review,setReview };
+  // sign out
+  
+  const logOut = ()=>{
+    signOut(auth)
+    .then(() => {
+      setUser('')
+    }).catch((error) => {
+      // An error happened.
+    })
+  }
+
+  const unsubscribe =()=>{
+    onAuthStateChanged(auth,(user)=>{
+     
+    })
+  
+  }
+  unsubscribe()
+
+
+    const authInfo ={auth,updateProfile,logOut,googleSignIn,signIn,loader,createUser,setloader,user,setUser,review,setReview };
 
   
     return (
