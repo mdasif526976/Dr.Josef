@@ -7,10 +7,10 @@ const Service = (props) => {
     const {_id,name,img,details} = props.service;
     return (
         <div>
-           <div className="card w-96 bg-base-100 shadow-xl">
+           <div className="card md:w-96  w-72  bg-base-100 shadow-xl">
            <PhotoProvider>
       <PhotoView src={img}>
-      <figure><img src={img} alt="Shoes" /></figure>
+      <figure><img src={img} alt="Loading" /></figure>
       </PhotoView>
     </PhotoProvider>
  

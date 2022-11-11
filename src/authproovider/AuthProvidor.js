@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth'
+import {createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth'
 import { app } from '../firebase/Firebase.config';
+import { useNavigate } from 'react-router-dom';
 const auth = getAuth(app);
 export const AuthContext = createContext();
 
@@ -9,6 +10,7 @@ const AuthProvidor = ({children}) => {
     const [oldReview,SetReview] = useState(0);
     const [userReview,setUserReview] = useState({});
     const [loader,setloader] = useState(true);
+    
 
   // create user  
   const createUser =(email,password)=>{
@@ -41,10 +43,23 @@ const AuthProvidor = ({children}) => {
     .then(result=>{
         const user = result.user;
         setUser(user);
+        
     })
     .catch(error=>{
         console.error(error);
     })
+  }
+
+  //   // authenticate by github
+  const githubProvider =  new GithubAuthProvider();
+  const githubSignIn = ()=>{
+    setloader(true);
+    signInWithPopup(auth,githubProvider).then(result =>{
+      const user = result.user;
+        setUser(user);
+        
+    })
+  .catch(err=>console.error(err))
   }
 
   // sign out
@@ -71,7 +86,7 @@ const AuthProvidor = ({children}) => {
  },[])
 
 
-    const authInfo ={auth,userReview,setUserReview,updateProfile,logOut
+    const authInfo ={auth,userReview,githubSignIn,setUserReview,updateProfile,logOut
       ,googleSignIn,signIn,loader,createUser,setloader,user,setUser,oldReview,SetReview };
 
   

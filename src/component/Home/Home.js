@@ -10,10 +10,10 @@ const Home = () => {
   
     return (
         <div className='my-5 mx-1'>
-            <div className='grid bg-sky-500 md:grid py-7 px-36 md:grid-cols-6'>
-                <div className='col-span-3 '>
+            <div className='grid bg-sky-500 md:grid md:py-7 md:px-36 md:grid-cols-6'>
+                <div className='md:col-span-3 '>
                    <div className=''>
-                      <img className='w-60 rounded-lg' src={img} alt=''></img>
+                      <img className='mx-5 w-60 rounded-lg' src={img} alt=''></img>
                    </div>
                   
                 </div>
@@ -76,7 +76,7 @@ const Home = () => {
 
          <div className='mt-16'>
           <h1 className='text-3xl font-samibold'>Lets Explore My Services</h1>
-         <div className='grid grid-cols-1 md:grid-cols-3 gap-3 mt-5 '>
+         <div className='grid grid-cols-1 md:grid-cols-3 md:gap-3 md:mt-5 '>
           {
          services.map((p)=> <Service key={p._id} service={p}></Service>)
           }
