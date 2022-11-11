@@ -1,30 +1,30 @@
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../authproovider/AuthProvidor';
+import React, {  useState } from 'react';
 
-const InputReview = () => {
-    const {user} = useContext(AuthContext)
-    const [review,setReview] = useState({});
+
+const AddService = () => {
+    const [service,setService] = useState({});
     const onblurHandler = (event)=>{
         const feild = event.target.name;
         const value = event.target.value;
-        const newReview = {...review}
-        newReview[feild] = value;
-        setReview(newReview)
+        const newService = {...service}
+        newService[feild] = value;
+        setService(newService)
     }
     const onSubmitHandle = (event) => {
         event.preventDefault();
-            fetch('http://localhost:5000/reviews',{
+
+            fetch('http://localhost:5000/addService',{
         method:'POST',
         headers:{
             'content-type':'application/json'
         },
-        body: JSON.stringify(review)
+        body: JSON.stringify(service)
        })
        .then(res=> res.json())
        .then(data=>  
         {
             if (data.acknowledged) {
-                alert('review added')
+                alert('service added')
                 event.target.reset();
             }
         }    
@@ -40,28 +40,28 @@ const InputReview = () => {
            <div className="hero min-h-screen bg-base-200">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Write Review Here !</h1>
+      <h1 className="text-5xl font-bold">Add Service Here !</h1>
     </div>
     <form onSubmit={onSubmitHandle}>
     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
       <div className="card-body">
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Enter Your Email</span>
+            <span className="label-text">Enter Service image</span>
           </label>
-          <input type="text" name='email' required onBlur={onblurHandler} placeholder="email" className="input input-bordered" />
+          <input type="text" name='img' required onBlur={onblurHandler} placeholder="Image" className="input input-bordered" />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Enter Your Name</span>
+            <span className="label-text">Enter Service Name</span>
           </label>
           <input type="text" name='name' required onBlur={onblurHandler} placeholder="name" className="input input-bordered" />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Enter Your review</span>
+            <span className="label-text">Enter Detail</span>
           </label>
-          <input type="text" required name='details' onBlur={onblurHandler} placeholder="Write a review" className="input input-bordered px-24 py-24" />
+          <input type="text" required name='details' onBlur={onblurHandler} placeholder="Write  descreption" className="input input-bordered px-24 py-24" />
         
         </div>
         <div className="form-control mt-6">
@@ -77,4 +77,4 @@ const InputReview = () => {
     );
 };
 
-export default InputReview;
+export default AddService;

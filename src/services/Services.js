@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Service from '../component/service/Service';
 
 const Services = () => {
@@ -12,7 +12,7 @@ const Services = () => {
           }
           <div className='card w-96 bg-base-100 shadow-xl py-12'>
             <h1>Add A Service</h1>
-            <button className='text-5xl text-blue-600'>+</button>
+            <Link to='/addService' className='text-5xl text-blue-600'>+</Link>
           </div>
           </div>
         </div>
