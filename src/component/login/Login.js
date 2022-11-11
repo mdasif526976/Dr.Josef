@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../authproovider/AuthProvidor';
 import logo from '../../image/73812-cloud-computing-security.gif'
 
 const Login = () => {
     const {setUser,signIn,googleSignIn} = useContext(AuthContext);
 	const navigate = useNavigate();
+	const location = useLocation();
+      
+      const from = location.state?.form?.pathname || '/';
     const handlesubmit =(event)=>{
       event.preventDefault();
       const form = event.target;
@@ -15,7 +18,7 @@ const Login = () => {
 	  .then((userCredential) => {
 		const user = userCredential.user;
 		setUser(user)
-		navigate('/')
+		navigate(from,{replace:true})
         
 		 })
 	

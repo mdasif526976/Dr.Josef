@@ -4,7 +4,7 @@ import { AuthContext } from '../authproovider/AuthProvidor';
 
 const Navbar = () => {
     const {review,user,logOut} = useContext(AuthContext)
-    console.log(user.photoURL)
+    
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -17,7 +17,7 @@ const Navbar = () => {
 <Link to='/' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Home</Link>
 <Link to='/services' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>Services</Link>
 {
-    user.uid?
+    user?.uid ?
    <>
     <Link to='/review' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>
     <div className='relative'>
@@ -43,15 +43,15 @@ const Navbar = () => {
     </ul>
     </div>
     <div>
-        {user.uid &&
-            <img className='w-24 h-24 p-3 rounded-full hidden md:visible' src={user.photoURL} alt=''></img>
+        {user?.uid  &&
+            <img className='w-24 h-24 p-3 rounded-full hidden md:visible' src={user?.photoURL} alt=''></img>
         }
     </div>
     <div className="dropdown dropdown-end md:hidden">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-        {user.uid ?<>
-            <img className='w-36 h-36 p-3 rounded-full' src={user.photoURL} alt=''></img>
+        {user?.uid ?<>
+            <img className='w-36 h-36 p-3 rounded-full' src={user?.photoURL} alt=''></img>
             </>
             :<div>
                 <svg className="swap-off fill-current" 

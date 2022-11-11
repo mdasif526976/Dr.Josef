@@ -5,6 +5,8 @@ import Detail from "../component/detail/Detail";
 import Error from "../component/Error/Error";
 import Home from "../component/Home/Home";
 import Login from "../component/login/Login";
+import Private from "../component/privateroute/Private";
+import InputReview from "../component/review/InputReview";
 import Signup from "../component/signup/Signup";
 import Main from "../layout/Main";
 import Services from "../services/Services";
@@ -36,6 +38,10 @@ export const router = createBrowserRouter([
         {
           path:'/signup',
           element:<Signup></Signup>
+        },
+        {
+          path:'/review',
+          element:<Private><InputReview></InputReview></Private>
         },
         {
           path:'/blog',

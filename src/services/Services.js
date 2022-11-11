@@ -10,6 +10,10 @@ const Services = () => {
           {
          services.map((p)=> <Service key={p._id} service={p}></Service>)
           }
+          <div className='card w-96 bg-base-100 shadow-xl py-12'>
+            <h1>Add A Service</h1>
+            <button className='text-5xl text-blue-600'>+</button>
+          </div>
           </div>
         </div>
     );
