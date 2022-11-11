@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../authproovider/AuthProvidor';
 
 const InputReview = () => {
-    const {user} = useContext(AuthContext)
+    const {setUserReview,oldReview,SetReview} = useContext(AuthContext)
     const [review,setReview] = useState({});
     const onblurHandler = (event)=>{
         const feild = event.target.name;
@@ -13,6 +13,7 @@ const InputReview = () => {
     }
     const onSubmitHandle = (event) => {
         event.preventDefault();
+        setUserReview(review)
             fetch('http://localhost:5000/reviews',{
         method:'POST',
         headers:{
@@ -24,6 +25,7 @@ const InputReview = () => {
        .then(data=>  
         {
             if (data.acknowledged) {
+                SetReview(oldReview+1)
                 alert('review added')
                 event.target.reset();
             }

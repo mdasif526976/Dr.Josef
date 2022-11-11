@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../authproovider/AuthProvidor';
 
 const Navbar = () => {
-    const {review,user,logOut} = useContext(AuthContext)
+    const {oldReview,user,logOut} = useContext(AuthContext)
     
     return (
         <div>
@@ -19,11 +19,11 @@ const Navbar = () => {
 {
     user?.uid ?
    <>
-    <Link to='/review' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>
+    <Link to='/userReview' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>
     <div className='relative'>
       <div>
         <p className='absolute left-3/4 bottom-4 bg-sky-500 px-2
-         rounded-full text-white'>{review}</p>
+         rounded-full text-white'>{oldReview}</p>
       </div>
       <div>
         <h1>My Reviews</h1>
@@ -63,14 +63,31 @@ const Navbar = () => {
         </div>
       </label>
       <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+       
+        <li><Link to='/'>Home</Link></li>
+       { user?.uid ? <>
         <li>
-          <Link className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </Link>
+        <Link to='/userReview' className='mr-6 hover:bg-sky-400 hover:text-white  py-2 px-4 rounded'>
+    <div className='relative'>
+      <div>
+        <p className='absolute left-3/4 bottom-4 bg-sky-500 px-2
+         rounded-full text-white'>{oldReview}</p>
+      </div>
+      <div>
+        <h1>My Reviews</h1>
+      </div>
+    </div>
+    </Link>
         </li>
-        <li><Link>Settings</Link></li>
-        <li><Link>Logout</Link></li>
+        <li><button onClick={logOut}>LogOut</button></li>
+        </> :
+        <>
+        <li><Link to='/signup'>Sign Up</Link></li>
+        <li><Link to='/login'>Login</Link></li>
+        </>}
+        <li><Link to='/about'>About</Link></li>
+        <li><Link to='/blog'>Blog</Link></li>
+       
       </ul>
     </div>
   </div>

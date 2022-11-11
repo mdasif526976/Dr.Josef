@@ -6,7 +6,8 @@ export const AuthContext = createContext();
 
 const AuthProvidor = ({children}) => {
     const [user,setUser] = useState({});
-    const [review,setReview] = useState(0)
+    const [oldReview,SetReview] = useState(0);
+    const [userReview,setUserReview] = useState({});
     const [loader,setloader] = useState(true);
 
   // create user  
@@ -22,8 +23,8 @@ const AuthProvidor = ({children}) => {
   // update profile
   const updateProfile =( displayName,photoURL)=>{
     updateProfile(auth.currentUser,{
-      displayName:`displayName`,
-      photoURL:`photoURL`
+      displayName:displayName,
+      photoURL:photoURL
     }).then(()=>{
 
     })
@@ -70,7 +71,8 @@ const AuthProvidor = ({children}) => {
  },[])
 
 
-    const authInfo ={auth,updateProfile,logOut,googleSignIn,signIn,loader,createUser,setloader,user,setUser,review,setReview };
+    const authInfo ={auth,userReview,setUserReview,updateProfile,logOut
+      ,googleSignIn,signIn,loader,createUser,setloader,user,setUser,oldReview,SetReview };
 
   
     return (
