@@ -78,8 +78,8 @@ const Home = () => {
 
          <div className='mt-16 container'>
           <h1 className='text-3xl  pb-8 font-samibold'>Lets Explore My Services</h1>
-         <div className='grid mx-[15%] lg:mx-2 grid-cols-1 lg:grid-cols-3
-          md:grid-cols-2 md:gap-3 gap-5 md:mt-5 '>
+         <div className='grid mx-[15%] lg:mx-[15px] grid-cols-1 lg:grid-cols-3
+          md:grid-cols-2 md:gap-3 gap-5 lg:gap-[70px] md:mt-5 '>
           {
          services.map((p)=> <Service key={p._id} service={p}></Service>)
           }
