@@ -1,14 +1,14 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth'
+import {createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider,
+ onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from 'firebase/auth'
 import { app } from '../firebase/Firebase.config';
-import { useNavigate } from 'react-router-dom';
 const auth = getAuth(app);
 export const AuthContext = createContext();
 
 const AuthProvidor = ({children}) => {
     const [user,setUser] = useState({});
     const [oldReview,SetReview] = useState(0);
-    const [userReview,setUserReview] = useState({});
+    const [reviewName,setReviewName] = useState(null)
     const [loader,setloader] = useState(true);
     
 
@@ -23,15 +23,10 @@ const AuthProvidor = ({children}) => {
    return signInWithEmailAndPassword(auth,email,password)
   }
   // update profile
-  const updateProfile =( displayName,photoURL)=>{
-    updateProfile(auth.currentUser,{
+  const updateUser =( displayName,photoURL)=>{
+    return updateProfile(auth.currentUser,{
       displayName:displayName,
       photoURL:photoURL
-    }).then(()=>{
-
-    })
-    .catch((error)=>{
-     console.error(error);
     })
     
   }
@@ -39,15 +34,8 @@ const AuthProvidor = ({children}) => {
   const googleProvider = new GoogleAuthProvider();
   const googleSignIn = ()=>{
     setloader(true)
-   signInWithPopup(auth,googleProvider)
-    .then(result=>{
-        const user = result.user;
-        setUser(user);
-        
-    })
-    .catch(error=>{
-        console.error(error);
-    })
+   return signInWithPopup(auth,googleProvider)
+    
   }
 
   //   // authenticate by github
@@ -73,21 +61,18 @@ const AuthProvidor = ({children}) => {
     })
   }
 
- useEffect(()=>{
-  const unsubscribe =
-    onAuthStateChanged(auth,currentUser=>{
-     setUser(currentUser)
-     setloader(false)
-    })
+  useEffect(()=>{
+    const UnSubscribe = onAuthStateChanged(auth,currentUser =>{  
+         setUser(currentUser)
+         setloader(false)
+     })
+        return ()=> UnSubscribe();
+  },[])
 
-  return ()=>{
-    return unsubscribe();
-  }
- },[])
-
-
-    const authInfo ={auth,userReview,githubSignIn,setUserReview,updateProfile,logOut
-      ,googleSignIn,signIn,loader,createUser,setloader,user,setUser,oldReview,SetReview };
+    const authInfo ={auth,githubSignIn,updateUser,logOut
+      ,googleSignIn,signIn,loader,createUser,setloader,user,setUser,oldReview,SetReview,
+      reviewName,setReviewName
+    };
 
   
     return (

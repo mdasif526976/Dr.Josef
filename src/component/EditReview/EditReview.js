@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Review = ({review}) => {
-    const {name,details,img,date} = review;
+const EditReview = ({review,Delete,setModalData}) => {
+    const {_id,name,details,img,service,date} = review;
+  
     return (
         <div>
-          <div className="container flex flex-col w-full max-w-lg p-5
+            <div className="container flex flex-col w-full max-w-lg p-5
 		mx-auto divide-y rounded-md divide-gray-700 bg-gray-200
 		 dark:text-gray-800">
 	<div className="flex justify-between p-4">
@@ -27,8 +28,17 @@ const Review = ({review}) => {
 			</div>
 		</div>
 		</div>
+       
 	<div className="p-4 space-y-2 text-sm text-gray-900">
-		<p> {details}</p>
+        <strong className='text-[18px]'>Service Name: <span>{service}</span></strong>
+		<p className='text-xl'> {details}</p>
+        <div className='flex justify-between '>
+        <label  onClick={()=>setModalData(review)} htmlFor="edit-text"
+         className="btn text-white btn-info"
+        >Edit Review</label>
+      	<button onClick={()=> Delete(_id)} className='btn text-white btn-error'
+        >Delete Review</button>
+      </div>
 	</div>
 </div>
 
@@ -36,4 +46,4 @@ const Review = ({review}) => {
     );
 };
 
-export default Review;
+export default EditReview;

@@ -43,15 +43,15 @@ export const router = createBrowserRouter([
         },
         {
              path:'/userReview',
-             element:<ReviewUser></ReviewUser>
+             element:<Private><ReviewUser></ReviewUser></Private>
         },
         {
-          path:'/review',
+          path:'/review/:id',
           element:<Private><InputReview></InputReview></Private>
         },
         {
           path:'/addService',
-          element:<AddService></AddService>
+          element:<Private><AddService></AddService></Private>
         },
         {
           path:'/blog',

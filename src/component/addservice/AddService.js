@@ -1,6 +1,5 @@
 import React, {  useState } from 'react';
 
-
 const AddService = () => {
     const [service,setService] = useState({});
     const onblurHandler = (event)=>{
@@ -43,7 +42,8 @@ const AddService = () => {
       <h1 className="text-5xl font-bold">Add Service Here !</h1>
     </div>
     <form onSubmit={onSubmitHandle}>
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    <div className="card flex-shrink-0 w-[95%] lg:w-full max-w-sm shadow-2xl 
+    bg-base-100">
       <div className="card-body">
         <div className="form-control">
           <label className="label">

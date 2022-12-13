@@ -1,19 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../authproovider/AuthProvidor';
-
+import { format } from 'date-fns'
+import { useNavigate, useParams } from 'react-router-dom';
 const InputReview = () => {
-    const {setUserReview,oldReview,SetReview} = useContext(AuthContext)
-    const [review,setReview] = useState({});
-    const onblurHandler = (event)=>{
-        const feild = event.target.name;
-        const value = event.target.value;
-        const newReview = {...review}
-        newReview[feild] = value;
-        setReview(newReview)
-    }
+    const {oldReview,SetReview,user,setReviewName,reviewName} = useContext(AuthContext)
+       const location = useParams();
+       const navigate = useNavigate();
     const onSubmitHandle = (event) => {
         event.preventDefault();
-        setUserReview(review)
+        const form = event.target;
+        const details = form.details.value;
+        const date =format(new Date(),'PP');
+        const review = {name:user?.displayName, email:user?.email,details:details,
+          img:user.photoURL,service:reviewName,
+          date:date} ;
+
+
             fetch('https://assignment-11-server-site-chi.vercel.app/reviews',{
         method:'POST',
         headers:{
@@ -26,7 +28,9 @@ const InputReview = () => {
         {
             if (data.acknowledged) {
                 SetReview(oldReview+1)
+                setReviewName(null)
                 alert('review added')
+                navigate(`/services/${location.id}`)
                 event.target.reset();
             }
         }    
@@ -34,9 +38,6 @@ const InputReview = () => {
        .catch(error=>console.log(error))
 
     }
-
-    
-    
     return (
         <div>
            <div className="hero min-h-screen bg-base-200">
@@ -45,25 +46,35 @@ const InputReview = () => {
       <h1 className="text-5xl font-bold">Write Review Here !</h1>
     </div>
     <form onSubmit={onSubmitHandle}>
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    <div className="card flex-shrink-0 mx-2 lg:w-full w-[90%]  max-w-sm shadow-2xl bg-base-100">
       <div className="card-body">
         <div className="form-control">
           <label className="label">
             <span className="label-text">Enter Your Email</span>
           </label>
-          <input type="text" name='email' required onBlur={onblurHandler} placeholder="email" className="input input-bordered" />
+          <input type="text" name='email' value={user.email}
+           placeholder="email" className="input input-bordered" />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Enter Your Name</span>
           </label>
-          <input type="text" name='name' required onBlur={onblurHandler} placeholder="name" className="input input-bordered" />
+          <input type="text" name='name' value={user.displayName}
+           placeholder="name" className="input input-bordered" />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Service Name</span>
+          </label>
+          <input type="text" name='name' value={reviewName} disabled
+           placeholder="name" className="input input-bordered" />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Enter Your review</span>
           </label>
-          <input type="text" required name='details' onBlur={onblurHandler} placeholder="Write a review" className="input input-bordered px-24 py-24" />
+          <input type="text" required name='details'
+           placeholder="Write a review" className="input input-bordered px-24 py-24" />
         
         </div>
         <div className="form-control mt-6">
