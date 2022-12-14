@@ -50,7 +50,7 @@ const Signup = () => {
         form.reset();
       }
       const saveUser =(user)=>{
-        fetch(`http://localhost:5000/user`,{
+        fetch(`https://assignment-11-server-site-chi.vercel.app/user`,{
             method:'POST',
             headers:{'content-type': 'application/json'},
             body:JSON.stringify(user)
